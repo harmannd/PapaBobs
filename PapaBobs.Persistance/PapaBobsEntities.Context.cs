@@ -25,6 +25,6 @@ namespace PapaBobs.Persistance
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderEntity> OrderEntities { get; set; }
     }
 }

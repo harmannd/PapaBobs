@@ -14,8 +14,8 @@ namespace PapaBobs.Web {
             if (!Page.IsPostBack) {                
                 populateDropDowns();
             }
-            if (IsValidPizza()) {
-                //updateTotal();
+            if (isValidPizza()) {
+                updateTotal();
             }
         }
 
@@ -27,14 +27,19 @@ namespace PapaBobs.Web {
         private void populateDropDowns() {         
             dropDownSize.DataSource = orderManager.populateSizeDropdown();
             dropDownSize.DataBind();
+            
 
             dropDownCrust.DataSource = orderManager.populateCrustDropdown();
             dropDownCrust.DataBind();
         }
 
-        private bool IsValidPizza() {
+        private bool isValidPizza() {
             return orderManager.ValidateSizeInput(dropDownSize.SelectedValue)
                 && orderManager.ValidateCrustInput(dropDownCrust.SelectedValue);
+        }
+
+        private void updateTotal() {
+
         }
     }
 }

@@ -32,13 +32,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PapaBobsDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Order">
+        <EntityType Name="OrderEntity">
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
           <Property Name="OrderId" Type="Guid" Nullable="false" />
-          <Property Name="Size" Type="Int32" Nullable="false" />
-          <Property Name="Crust" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="PapaBobsDbModel.Sizes" Nullable="false" />
+          <Property Name="Crust" Type="PapaBobsDbModel.Crusts" Nullable="false" />
           <Property Name="Sausage" Type="Boolean" Nullable="false" />
           <Property Name="Pepperoni" Type="Boolean" Nullable="false" />
           <Property Name="Onions" Type="Boolean" Nullable="false" />
@@ -48,20 +48,23 @@
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PaymentType" Type="Int32" Nullable="false" />
+          <Property Name="PaymentType" Type="PapaBobsDbModel.Payments" Nullable="false" />
           <Property Name="Completed" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="PapaBobsDbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderEntities" EntityType="PapaBobsDbModel.OrderEntity" />
         </EntityContainer>
+        <EnumType Name="Sizes" a:ExternalTypeName="PapaBobs.DTO.Enums.Sizes" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="Crusts" a:ExternalTypeName="PapaBobs.DTO.Enums.Crusts" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="Payments" a:ExternalTypeName="PapaBobs.DTO.Enums.Payments" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="PapaBobsDbModelStoreContainer" CdmEntityContainer="PapaBobsDbEntities">
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="PapaBobsDbModel.Order">
+          <EntitySetMapping Name="OrderEntities">
+            <EntityTypeMapping TypeName="PapaBobsDbModel.OrderEntity">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Size" ColumnName="Size" />

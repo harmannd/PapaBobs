@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PapaBobs.Persistance
-{
-    public class OrderRepository
-    {
+namespace PapaBobs.Persistance {
+    public class OrderRepository {
         public static List<DTO.Order> GetOrders() {
             PapaBobsDbEntities db = new PapaBobsDbEntities();
-            var dbOrders = db.Orders.ToList();
+            var dbOrders = db.OrderEntities.ToList();
 
             var dtoOrders = new List<DTO.Order>();
 
@@ -34,7 +32,7 @@ namespace PapaBobs.Persistance
 
                 dtoOrders.Add(dtoOrder);
             }
-            return dtoOrders;
+            return dtoOrders;    
         }
     }
 }

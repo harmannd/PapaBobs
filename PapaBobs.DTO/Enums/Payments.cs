@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PapaBobs.Domain {
-    public enum Crusts {
-        Regular,
-        Thin,
-        Thick
+namespace PapaBobs.DTO.Enums {
+    public enum Payments {
+        Cash,
+        Credit
     }
 }
