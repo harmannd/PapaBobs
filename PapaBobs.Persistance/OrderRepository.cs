@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace PapaBobs.Persistance {
     public class OrderRepository {
+        public static void CreateOrder(DTO.Order orderDTO) {
+            var db = new PapaBobsDbEntities();
+
+            var order = converToEntity(orderDTO);
+            db.OrderEntities.Add(order);
+            db.SaveChanges();
+        }
+
         public static List<DTO.Order> GetOrders() {
-            PapaBobsDbEntities db = new PapaBobsDbEntities();
+            var db = new PapaBobsDbEntities();
             var dbOrders = db.OrderEntities.ToList();
 
             var dtoOrders = new List<DTO.Order>();
@@ -32,7 +40,28 @@ namespace PapaBobs.Persistance {
 
                 dtoOrders.Add(dtoOrder);
             }
-            return dtoOrders;    
+            return dtoOrders;
+        }
+
+        private static OrderEntity converToEntity(DTO.Order orderDTO) {
+            var orderEntity = new OrderEntity();
+
+            orderEntity.OrderId = orderDTO.OrderId;
+            orderEntity.Size = orderDTO.Size;
+            orderEntity.Crust = orderDTO.Crust;
+            orderEntity.Sausage = orderDTO.Sausage;
+            orderEntity.Pepperoni = orderDTO.Pepperoni;
+            orderEntity.Onions = orderDTO.Onions;
+            orderEntity.GreenPeppers = orderDTO.GreenPeppers;
+            orderEntity.TotalCost = orderDTO.TotalCost;
+            orderEntity.Name = orderDTO.Name;
+            orderEntity.Address = orderDTO.Address;
+            orderEntity.Zip = orderDTO.Zip;
+            orderEntity.Phone = orderDTO.Phone;
+            orderEntity.PaymentType = orderDTO.PaymentType;
+            orderEntity.Completed = orderDTO.Completed;
+
+            return orderEntity;
         }
     }
 }

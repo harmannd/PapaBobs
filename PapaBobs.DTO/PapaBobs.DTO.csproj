@@ -44,6 +44,7 @@
     <Compile Include="Enums\Payments.cs" />
     <Compile Include="Enums\Sizes.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="PizzaPriceDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

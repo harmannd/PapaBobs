@@ -26,5 +26,6 @@ namespace PapaBobs.Persistance
         }
     
         public virtual DbSet<OrderEntity> OrderEntities { get; set; }
+        public virtual DbSet<PizzaPrice> PizzaPrices { get; set; }
     }
 }
