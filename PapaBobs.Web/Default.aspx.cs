@@ -13,17 +13,15 @@ namespace PapaBobs.Web {
         }
 
         protected void buttonOrder_Click(object sender, EventArgs e) {
-            if (nameInputed() && addressInputed() && zipInputed() && phoneInputed()) {
-                try {
-                    var order = buildOrder();
-                    OrderManager.CreateOrder(order);
-                    Response.Redirect("Success.aspx", false);
-                } 
-                catch (Exception ex) {
-                    labelValidation.Text = ex.Message;
-                    labelValidation.Visible = true;
-                    return;
-                }
+            try {
+                var order = buildOrder();
+                OrderManager.CreateOrder(order);
+                Response.Redirect("Success.aspx", false);
+            } 
+            catch (Exception ex) {
+                labelValidation.Text = ex.Message;
+                labelValidation.Visible = true;
+                return;
             }
         }
 
@@ -43,42 +41,6 @@ namespace PapaBobs.Web {
             order.PaymentType = determinePayment();
 
             return order;
-        }
-
-        private bool phoneInputed() {
-            if (textBoxPhone.Text.Trim().Length == 0) {
-                labelValidation.Text = "Please enter a phone number.";
-                labelValidation.Visible = true;
-                return false;
-            }
-            return true;
-        }
-
-        private bool zipInputed() {
-            if (textBoxZip.Text.Trim().Length == 0) {
-                labelValidation.Text = "Please enter a zipcode number.";
-                labelValidation.Visible = true;
-                return false;
-            }
-            return true;
-        }
-
-        private bool addressInputed() {
-            if (textBoxAddress.Text.Trim().Length == 0) {
-                labelValidation.Text = "Please enter an address.";
-                labelValidation.Visible = true;
-                return false;
-            }
-            return true;
-        }
-
-        private bool nameInputed() {
-            if (textBoxName.Text.Trim().Length == 0) {
-                labelValidation.Text = "Please enter a name.";
-                labelValidation.Visible = true;
-                return false;
-            }
-            return true;
         }
 
         private DTO.Enums.Sizes determineSize() {

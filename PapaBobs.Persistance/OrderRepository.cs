@@ -43,6 +43,13 @@ namespace PapaBobs.Persistance {
             return dtoOrders;
         }
 
+        public static void CompleteOrder(Guid orderId) {
+            var db = new PapaBobsDbEntities();
+            var order = db.OrderEntities.FirstOrDefault(p => p.OrderId == orderId);
+            order.Completed = true;
+            db.SaveChanges();
+        }
+
         private static OrderEntity converToEntity(DTO.Order orderDTO) {
             var orderEntity = new OrderEntity();
 
@@ -60,6 +67,7 @@ namespace PapaBobs.Persistance {
             orderEntity.Phone = orderDTO.Phone;
             orderEntity.PaymentType = orderDTO.PaymentType;
             orderEntity.Completed = orderDTO.Completed;
+            orderEntity.TotalCost = orderDTO.TotalCost;
 
             return orderEntity;
         }
